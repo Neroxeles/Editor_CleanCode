@@ -1,0 +1,71 @@
+.button {
+    -fx-background-color:transparent;
+    -fx-background-radius:0.0;
+	-fx-background-position: center;
+	-fx-background-size: 28.0px;
+    -fx-background-repeat: no-repeat;
+	-fx-text-fill: white;
+    -fx-pref-width: 30.0px;
+	-fx-pref-height: 30.0px;
+}
+
+.button:hover {
+    -fx-background-color:#d6d6d6;
+}
+
+.button:pressed {
+    -fx-background-color:#b2b2b2;
+}
+
+#buttonNewFile {
+	-fx-background-image: url("newFile.png");
+}
+
+#buttonOpenFile {
+	-fx-background-image: url("openFile.png");
+}
+
+#buttonSaveFile {
+	-fx-background-image: url("saveFile.png");
+}
+
+#buttonCut {
+	-fx-background-image: url("cut.png");
+}
+
+#buttonCopy {
+	-fx-background-image: url("copy.png");
+}
+
+#buttonPaste {
+	-fx-background-image: url("paste.png");
+}
+
+#buttonSearch {
+	-fx-background-image: url("searchAndReplace.png");
+}
+
+#buttonUndo {
+	-fx-background-image: url("undo.png");
+}
+
+#buttonRedo {
+	-fx-background-image: url("redo.png");
+}
+
+#buttonConfig {
+	-fx-background-image: url("config.png");
+}
+#buttonLargerFont {
+	-fx-background-image: url("plus.png");
+	
+}
+#buttonSmallerFont {
+	-fx-background-image: url("minus.png");
+}
+
+.text-area:focused {
+	-fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color; 
+    -fx-background-insets: 0.0, 1.0, 2.0;
+    -fx-background-radius: 5.0, 4.0, 3.0;
+}
