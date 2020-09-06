@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 public class SaveRequestElements {
 
 	// Label
-	private Label label = new Label("Es liegen aktualisierte Datensätze vor.\nWollen sie diese Speichern?");
+	private Label label = new Label("Es liegen aktualisierte Datensätze vor.\nWollen Sie diese Speichern?");
 	// Buttons
 	private Button buttonSave = new Button("Speichern");;
 	private Button buttonDontSave = new Button("Nicht speichern");;

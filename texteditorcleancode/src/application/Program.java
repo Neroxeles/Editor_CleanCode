@@ -22,5 +22,6 @@ public class Program extends Application {
 		controller.initSaveRequestStage();
 		controller.initFontStage();
 		controller.initInfoStage();
+		controller.initSearchReplaceStage();
 	}
 }

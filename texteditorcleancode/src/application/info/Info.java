@@ -35,25 +35,25 @@ public class Info {
 	private void initScene() {
 
 		titlePaneSave.setText("Speichern");
-		titlePaneSave.setContent(null);
+		titlePaneSave.setContent(infoElements.getLabelSave());
 
 		titlePaneEdit.setText("Bearbeiten");
-		titlePaneEdit.setContent(null);
+		titlePaneEdit.setContent(infoElements.getLabelEdit());
 
 		titlePaneShortcuts.setText("Shortcuts");
-		titlePaneShortcuts.setContent(null);
+		titlePaneShortcuts.setContent(infoElements.getLabelShortcuts());
 
 		titlePaneFormat.setText("Format");
-		titlePaneFormat.setContent(null);
+		titlePaneFormat.setContent(infoElements.getLabelFormat());
 
 		titlePaneSearchReplace.setText("Suchen und Ersetzen");
-		titlePaneSearchReplace.setContent(null);
+		titlePaneSearchReplace.setContent(infoElements.getLabelSearchReplace());
 
 		titlePaneStatus.setText("Statusleiste");
-		titlePaneStatus.setContent(null);
+		titlePaneStatus.setContent(infoElements.getLabelStatus());
 
 		titlePaneAbout.setText("Über...");
-		titlePaneAbout.setContent(null);
+		titlePaneAbout.setContent(infoElements.getLabelAbout());
 
 		// Zuordnung der Reinfolge
 		mainAccordion.getPanes().addAll(titlePaneSave, titlePaneEdit, titlePaneShortcuts, titlePaneFormat,
@@ -68,7 +68,7 @@ public class Info {
 		infoStage.setScene(scene);
 		// Mindestgröße
 		infoStage.setMinHeight(300);
-		infoStage.setMinWidth(300);
+		infoStage.setMinWidth(430);
 		// Sichtbarkeit der Stage TODO remove later
 		infoStage.show();
 	}

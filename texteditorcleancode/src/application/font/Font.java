@@ -31,6 +31,7 @@ public class Font {
 		vBox_FontFamily.getChildren().addAll(fontElements.getLabelFontFamily(), fontElements.getListViewFontFamily());
 		vBox_FontSize.getChildren().addAll(fontElements.getLabelFontSize(), fontElements.getListViewFontSize());
 		mainHBox.getChildren().addAll(vBox_FontFamily, vBox_FontSize);
+		mainHBox.setPrefSize(300, 350);
 	}
 	
 	private void initStage() {
@@ -38,7 +39,8 @@ public class Font {
 		fontStage.setTitle("Ändern der Schriftart/-größe");
 		// Scene der Stage
 		fontStage.setScene(scene);
-		fontStage.setResizable(false);
+		fontStage.setMinHeight(100);
+		fontStage.setMinWidth(300);
 		// Sichtbarkeit der Stage TODO remove later
 		fontStage.show();
 	}
