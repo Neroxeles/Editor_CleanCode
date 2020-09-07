@@ -24,6 +24,8 @@ public class Controller {
 		this.primaryStage = primaryStage;
 	}
 
+	Values values = new Values();
+	
 	/********************************************************************************
 	 * ******************************************************************************
 	 * Alles zur primaryStage

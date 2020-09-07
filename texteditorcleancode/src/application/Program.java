@@ -2,6 +2,7 @@ package application;
 
 import application.controller.Controller;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 
 
@@ -23,5 +24,6 @@ public class Program extends Application {
 		controller.initFontStage();
 		controller.initInfoStage();
 		controller.initSearchReplaceStage();
+		primaryStage.setOnCloseRequest(e -> Platform.exit());
 	}
 }
