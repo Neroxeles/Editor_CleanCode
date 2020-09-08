@@ -1,6 +1,5 @@
 package application.searchreplace;
 
-import application.editor.EditorTextArea;
 import application.searchreplace.events.EventFunctionsSearchReplace;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -11,16 +10,15 @@ import javafx.scene.control.ToolBar;
 
 public class SearchReplaceElements {
 
-	public SearchReplaceElements(EditorTextArea editorTextArea) {
-		this.editorTextArea = editorTextArea;
+	public SearchReplaceElements(EventFunctionsSearchReplace eventFunctionsSearchReplace) {
+		this.eventFunctionsSearchReplace = eventFunctionsSearchReplace;
 		initTextFieldSearchFor();
 		initTextFieldReplaceWith();
 		initToolBarItems();
 		initToolBar();
 	}
 	
-	EditorTextArea editorTextArea;
-	EventFunctionsSearchReplace eventFunctionsSearchReplace = new EventFunctionsSearchReplace(editorTextArea);
+	EventFunctionsSearchReplace eventFunctionsSearchReplace;
 
 	// Labels
 	Label labelSearchFor = new Label("\tSuche nach\t");

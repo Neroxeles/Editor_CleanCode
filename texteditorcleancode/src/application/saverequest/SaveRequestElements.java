@@ -1,28 +1,17 @@
 package application.saverequest;
 
-import application.controller.Values;
-import application.editor.EditorTextArea;
 import application.saverequest.events.EventFunctionsSaveRequest;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
 public class SaveRequestElements {
 	
-	public SaveRequestElements(Values values, EditorTextArea editorTextArea, Stage primaryStage,
-			Stage saveRequestStage) {
-		this.values = values;
-		this.editorTextArea = editorTextArea;
-		this.primaryStage = primaryStage;
-		this.saveRequestStage = saveRequestStage;
+	public SaveRequestElements(EventFunctionsSaveRequest eventFunctionsSaveRequest) {
+		this.eventFunctionsSaveRequest = eventFunctionsSaveRequest;
 		initButtons();
 	}
 
-	Values values;
-	EditorTextArea editorTextArea;
-	Stage primaryStage;
-	Stage saveRequestStage;
-	EventFunctionsSaveRequest eventFunctionsSaveRequest = new EventFunctionsSaveRequest(values, editorTextArea, primaryStage, saveRequestStage);
+	EventFunctionsSaveRequest eventFunctionsSaveRequest;
 	
 	// Label
 	private Label label = new Label("Es liegen aktualisierte Datensätze vor.\nWollen Sie diese Speichern?");

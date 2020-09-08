@@ -10,9 +10,9 @@ import javafx.scene.control.ListView;
 
 public class FontElements {
 
-	public FontElements(Values values, EditorTextArea editorTextArea) {
+	public FontElements(Values values, EventFunctionsFont eventFunctionsFont) {
 		this.values = values;
-		this.editorTextArea = editorTextArea;
+		this.eventFunctionsFont = eventFunctionsFont;
 		initListViews();
 		initListViewFontFamilyListener();
 		initListViewFontSizeListener();
@@ -20,9 +20,7 @@ public class FontElements {
 
 	// Values für Schriftart
 	Values values;
-	// Events
-	EditorTextArea editorTextArea;
-	EventFunctionsFont eventFunctionsFont = new EventFunctionsFont(editorTextArea);
+	EventFunctionsFont eventFunctionsFont;
 
 	// Labels
 	private Label labelFontFamily = new Label("Schriftart");
