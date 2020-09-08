@@ -35,7 +35,7 @@ public class EventFunctionsEdit {
 	/*****************************************************
 	 * Methode - Kopieren
 	 *****************************************************/
-	public void copySelectedText(Stage primaryStage) {
+	public void copySelectedText() {
 		clipboardContent.putString(editorTextArea.getSelectedText());
 		clipboard.setContent(clipboardContent);
 		editorTextArea.requestFocus();
@@ -44,7 +44,7 @@ public class EventFunctionsEdit {
 	/*****************************************************
 	 * Methode - Einfügen
 	 *****************************************************/
-	public void paste(Stage primaryStage) {
+	public void paste() {
 		if (clipboard.hasString()) {
 			editorTextArea.insertText(editorTextArea.getCaretPosition(), clipboard.getString());
 		}
@@ -82,7 +82,7 @@ public class EventFunctionsEdit {
 	}
 
 	/*****************************************************
-	 * Methode - getDate
+	 * Methode - Zeitstempel
 	 *****************************************************/
 	public void timestamp() {
 		Calendar calender = Calendar.getInstance();

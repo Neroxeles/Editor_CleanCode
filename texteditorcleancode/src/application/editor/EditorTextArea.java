@@ -45,6 +45,44 @@ public class EditorTextArea {
 		return textArea.getText();
 	}
 
+	public boolean selectSubstringFrom(String substring) {
+		int anchor = textArea.getText().indexOf(substring, textArea.getCaretPosition());
+		if (anchor != -1) {
+			textArea.selectRange(anchor, anchor + substring.length());
+			// Substring ist im Text enthalten
+			return true;
+		} else {
+			anchor = textArea.getText().indexOf(substring, 0);
+			if (anchor != -1) {
+				textArea.selectRange(anchor, anchor + substring.length());
+				// Substring ist im Text enthalten
+				return true;
+			} else {
+				// Substring ist nicht im Text enthalten
+				return false;
+			}
+		}
+	}
+	
+	public boolean selectLastSubstringFrom(String substring) {
+		int anchor = textArea.getText().lastIndexOf(substring, textArea.getCaretPosition() - substring.length() - 1);
+		if (anchor != -1) {
+			textArea.selectRange(anchor, anchor + substring.length());
+			// Substring ist im Text enthalten
+			return true;
+		} else {
+			anchor = textArea.getText().lastIndexOf(substring, textArea.getText().length()-1);
+			if (anchor != -1) {
+				textArea.selectRange(anchor, anchor + substring.length());
+				// Substring ist im Text enthalten
+				return true;
+			} else {
+				// Substring ist nicht im Text enthalten
+				return false;
+			}
+		}
+	}
+	
 	public void selectAll() {
 		textArea.selectAll();
 	}

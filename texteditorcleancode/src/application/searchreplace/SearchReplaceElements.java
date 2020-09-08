@@ -1,5 +1,7 @@
 package application.searchreplace;
 
+import application.editor.EditorTextArea;
+import application.searchreplace.events.EventFunctionsSearchReplace;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -9,11 +11,16 @@ import javafx.scene.control.ToolBar;
 
 public class SearchReplaceElements {
 
-	public SearchReplaceElements() {
+	public SearchReplaceElements(EditorTextArea editorTextArea) {
+		this.editorTextArea = editorTextArea;
 		initTextFieldSearchFor();
 		initTextFieldReplaceWith();
+		initToolBarItems();
 		initToolBar();
 	}
+	
+	EditorTextArea editorTextArea;
+	EventFunctionsSearchReplace eventFunctionsSearchReplace = new EventFunctionsSearchReplace(editorTextArea);
 
 	// Labels
 	Label labelSearchFor = new Label("\tSuche nach\t");
@@ -42,6 +49,14 @@ public class SearchReplaceElements {
 
 	private void initTextFieldReplaceWith() {
 		textFieldReplaceWith.setPrefWidth(230);
+	}
+	
+	private void initToolBarItems() {
+		buttonSearch.setOnAction(e -> eventFunctionsSearchReplace.search(textFieldSearchFor.getText(), labelInfo));
+		buttonPrev.setOnAction(e -> eventFunctionsSearchReplace.previousElement(textFieldSearchFor.getText(), labelInfo));
+		buttonNext.setOnAction(e -> eventFunctionsSearchReplace.nextElement(textFieldSearchFor.getText(), labelInfo));
+		buttonReplace.setOnAction(e -> eventFunctionsSearchReplace.replace(textFieldSearchFor.getText(), textFieldReplaceWith.getText(), labelInfo));
+		buttonReplaceAll.setOnAction(e -> eventFunctionsSearchReplace.replaceAll(textFieldSearchFor.getText(), textFieldReplaceWith.getText(), labelInfo));
 	}
 
 	private void initToolBar() {

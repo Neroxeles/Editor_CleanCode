@@ -75,7 +75,7 @@ public class EventFunctionsOther {
 			values.setFontSize(values.getFontSize()-10);
 		}
 		
-		editorTextArea.setFont(Font.font(values.getFontfamily(), values.getFontSize()));
+		editorTextArea.setFont(Font.font(values.getFontFamily(), values.getFontSize()));
 
 		editorTextArea.requestFocus();
 	}
@@ -89,7 +89,7 @@ public class EventFunctionsOther {
 			values.setFontSize(values.getFontSize()+10);
 		}
 		
-		editorTextArea.setFont(Font.font(values.getFontfamily(), values.getFontSize()));
+		editorTextArea.setFont(Font.font(values.getFontFamily(), values.getFontSize()));
 		
 		editorTextArea.requestFocus();
 	}

@@ -5,6 +5,9 @@ import application.editor.EditorMenuBar;
 import application.editor.EditorStatusBar;
 import application.editor.EditorTextArea;
 import application.editor.EditorToolBar;
+import application.editor.events.EventFunctionsEdit;
+import application.editor.events.EventFunctionsFile;
+import application.editor.events.EventFunctionsOther;
 import application.font.Font;
 import application.font.FontElements;
 import application.info.Info;
@@ -22,10 +25,11 @@ public class Controller {
 	 *****************************************************/
 	public Controller(Stage primaryStage) {
 		this.primaryStage = primaryStage;
+		initEditorNeeds();
 	}
 
 	Values values = new Values();
-	
+
 	/********************************************************************************
 	 * ******************************************************************************
 	 * Alles zur primaryStage
@@ -35,11 +39,16 @@ public class Controller {
 	// Stage
 	private Stage primaryStage;
 
+	// Events
+	private EventFunctionsFile eventFunctionsFile;
+	private EventFunctionsEdit eventFunctionsEdit;
+	private EventFunctionsOther eventFunctionsOther;
+
 	// Elemente der PrimaryScene
-	private EditorMenuBar editorMenuBar = new EditorMenuBar();
-	private EditorToolBar editorToolBar = new EditorToolBar();
-	private EditorTextArea editorTextArea = new EditorTextArea();
-	private EditorStatusBar editorStatusBar = new EditorStatusBar();
+	private EditorMenuBar editorMenuBar;
+	private EditorToolBar editorToolBar;
+	private EditorTextArea editorTextArea;
+	private EditorStatusBar editorStatusBar;
 
 	// Scene für die primaryStage
 	private Editor editor;
@@ -52,6 +61,21 @@ public class Controller {
 		editor = new Editor(editorMenuBar, editorToolBar, editorTextArea, editorStatusBar, primaryStage);
 	}
 
+	/*****************************************************
+	 * Innitialisieren der Notwendigen Utensilien
+	 *****************************************************/
+	private void initEditorNeeds() {
+		editorTextArea = new EditorTextArea();
+		eventFunctionsFile = new EventFunctionsFile(values, editorTextArea, saveRequestStage, primaryStage);
+		eventFunctionsEdit = new EventFunctionsEdit(editorTextArea, searchReplaceStage);
+		eventFunctionsOther = new EventFunctionsOther(values, editor, editorTextArea, fontStage, infoStage);
+
+		editorMenuBar = new EditorMenuBar(eventFunctionsFile, eventFunctionsEdit, eventFunctionsOther);
+		editorToolBar = new EditorToolBar();
+		
+		editorStatusBar = new EditorStatusBar();
+	}
+
 	/********************************************************************************
 	 * ******************************************************************************
 	 * Alles zur saveRequestStage
@@ -62,7 +86,7 @@ public class Controller {
 	private Stage saveRequestStage = new Stage();
 
 	// Elemente der saveRequestStage
-	private SaveRequestElements saveRequestElements = new SaveRequestElements();
+	private SaveRequestElements saveRequestElements = new SaveRequestElements(values, editorTextArea, primaryStage, saveRequestStage);
 
 	// Scene für die saveRequestStage
 	private SaveRequest saveRequest;
@@ -85,7 +109,7 @@ public class Controller {
 	private Stage searchReplaceStage = new Stage();
 
 	// Elemente der SearchReplaceStage
-	private SearchReplaceElements searchReplaceElements = new SearchReplaceElements();
+	private SearchReplaceElements searchReplaceElements = new SearchReplaceElements(editorTextArea);
 
 	// Scene für die SearchReplaceStage
 	private SearchReplace searchReplace;
@@ -108,7 +132,7 @@ public class Controller {
 	private Stage fontStage = new Stage();
 
 	// Elemente der SearchReplaceStage
-	private FontElements fontElements = new FontElements();
+	private FontElements fontElements = new FontElements(values, editorTextArea);
 
 	// Scene für die FontStage
 	private Font font;
