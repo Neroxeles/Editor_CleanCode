@@ -57,4 +57,20 @@ public class Editor {
 		// Sichtbarkeit der primaryStage
 		primaryStage.show();
 	}
+	
+	public void showToolBar(boolean show) {
+		if (show) {
+			vBox_Center.getChildren().add(0, editorToolBar.getToolBar());
+		} else {
+			vBox_Center.getChildren().remove(0);
+		}
+	}
+	
+	public void showStatusBar(boolean show) {
+		if (show) {
+			vBox_Center.getChildren().add(vBox_Center.getChildren().size(), editorToolBar.getToolBar());
+		} else {
+			vBox_Center.getChildren().remove(vBox_Center.getChildren().size()-1);
+		}
+	}
 }

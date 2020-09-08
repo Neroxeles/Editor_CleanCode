@@ -8,6 +8,10 @@ public class Values {
 	private boolean isUpdated = false;
 	// Prüfe ob der aktuelle Prozess abgebrochen werden soll
 	private boolean isCanceled = false;
+	// Schriftart
+	private String fontfamily = "Arial";
+	// Schriftgröße
+	private int fontSize = 10;
 
 	public String getFilePath() {
 		return filePath;
@@ -31,5 +35,21 @@ public class Values {
 
 	public void setCanceled(boolean isCanceled) {
 		this.isCanceled = isCanceled;
+	}
+
+	public String getFontfamily() {
+		return fontfamily;
+	}
+
+	public void setFontfamily(String fontfamily) {
+		this.fontfamily = fontfamily;
+	}
+
+	public int getFontSize() {
+		return fontSize;
+	}
+
+	public void setFontSize(int fontSize) {
+		this.fontSize = fontSize;
 	}
 }

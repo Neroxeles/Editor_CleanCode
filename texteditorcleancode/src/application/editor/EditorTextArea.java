@@ -1,6 +1,7 @@
 package application.editor;
 
 import javafx.scene.control.TextArea;
+import javafx.scene.text.Font;
 
 public class EditorTextArea {
 
@@ -35,9 +36,41 @@ public class EditorTextArea {
 	public void setText(String text) {
 		textArea.setText(text);
 	}
-	
+
+	public void setFont(Font font) {
+		textArea.setFont(font);
+	}
+
 	public String getText() {
 		return textArea.getText();
+	}
+
+	public void selectAll() {
+		textArea.selectAll();
+	}
+
+	public String getSelectedText() {
+		return textArea.getSelectedText();
+	}
+
+	public void replaceSelection(String replacement) {
+		textArea.replaceSelection(replacement);
+	}
+
+	public void insertText(int caretPosition, String string) {
+		textArea.insertText(caretPosition, string);
+	}
+
+	public void appendText(String string) {
+		textArea.appendText(string);
+	}
+
+	public int getCaretPosition() {
+		return textArea.getCaretPosition();
+	}
+
+	public void setWordWrap(boolean activate) {
+		textArea.setWrapText(activate);
 	}
 
 	public void requestFocus() {
