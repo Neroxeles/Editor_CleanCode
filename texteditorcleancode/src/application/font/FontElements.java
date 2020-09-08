@@ -1,7 +1,6 @@
 package application.font;
 
 import application.controller.Values;
-import application.editor.EditorTextArea;
 import application.font.events.EventFunctionsFont;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
