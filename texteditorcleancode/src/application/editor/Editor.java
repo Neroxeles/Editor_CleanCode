@@ -68,7 +68,7 @@ public class Editor {
 	
 	public void showStatusBar(boolean show) {
 		if (show) {
-			vBox_Center.getChildren().add(vBox_Center.getChildren().size(), editorToolBar.getToolBar());
+			vBox_Center.getChildren().add(vBox_Center.getChildren().size(), editorStatusBar.getStatusBar());
 		} else {
 			vBox_Center.getChildren().remove(vBox_Center.getChildren().size()-1);
 		}

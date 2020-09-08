@@ -24,6 +24,7 @@ public class Program extends Application {
 		controller.initFontStage();
 		controller.initInfoStage();
 		controller.initSearchReplaceStage();
+		controller.initBidirectionality();
 		primaryStage.setOnCloseRequest(e -> Platform.exit());
 	}
 }

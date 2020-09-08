@@ -8,7 +8,8 @@ import javafx.stage.Stage;
 
 public class EventFunctionsOther {
 
-	public EventFunctionsOther(Values values, Editor editor, EditorTextArea editorTextArea, Stage fontStage, Stage infoStage) {
+	public void setNeeds(Values values, Editor editor, EditorTextArea editorTextArea, Stage fontStage,
+			Stage infoStage) {
 		this.values = values;
 		this.editor = editor;
 		this.editorTextArea = editorTextArea;
@@ -72,9 +73,9 @@ public class EventFunctionsOther {
 	public void fontSizeShrink() {
 
 		if (values.getFontSize() > 10) {
-			values.setFontSize(values.getFontSize()-10);
+			values.setFontSize(values.getFontSize() - 10);
 		}
-		
+
 		editorTextArea.setFont(Font.font(values.getFontFamily(), values.getFontSize()));
 
 		editorTextArea.requestFocus();
@@ -86,11 +87,11 @@ public class EventFunctionsOther {
 	public void fontSizeGrow() {
 
 		if (values.getFontSize() < 70) {
-			values.setFontSize(values.getFontSize()+10);
+			values.setFontSize(values.getFontSize() + 10);
 		}
-		
+
 		editorTextArea.setFont(Font.font(values.getFontFamily(), values.getFontSize()));
-		
+
 		editorTextArea.requestFocus();
 	}
 }

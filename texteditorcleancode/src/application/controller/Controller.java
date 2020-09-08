@@ -41,10 +41,10 @@ public class Controller {
 	// Stage
 	private Stage primaryStage;
 
-	// Events
-	private EventFunctionsFile eventFunctionsFile = new EventFunctionsFile(values, editorTextArea, saveRequestStage, primaryStage);
-	private EventFunctionsEdit eventFunctionsEdit = new EventFunctionsEdit(editorTextArea, searchReplaceStage);
-	private EventFunctionsOther eventFunctionsOther = new EventFunctionsOther(values, editor, editorTextArea, fontStage, infoStage);
+	// Events --> siehe unten "Notwendige Bidirektionalität"
+	private EventFunctionsFile eventFunctionsFile = new EventFunctionsFile();
+	private EventFunctionsEdit eventFunctionsEdit = new EventFunctionsEdit();
+	private EventFunctionsOther eventFunctionsOther = new EventFunctionsOther();
 
 	// Elemente der PrimaryScene
 	private EditorMenuBar editorMenuBar = new EditorMenuBar(eventFunctionsFile, eventFunctionsEdit, eventFunctionsOther);
@@ -163,5 +163,16 @@ public class Controller {
 	public void initInfoStage() {
 
 		info = new Info(infoElements, infoStage);
+	}
+	
+	/********************************************************************************
+	 * ******************************************************************************
+	 * Notwendige Bidirektionalität
+	 * ******************************************************************************
+	 ********************************************************************************/
+	public void initBidirectionality() {
+		eventFunctionsFile.setNeeds(values, editorTextArea, saveRequestStage, primaryStage);
+		eventFunctionsEdit.setNeeds(editorTextArea, searchReplaceStage);
+		eventFunctionsOther.setNeeds(values, editor, editorTextArea, fontStage, infoStage);
 	}
 }

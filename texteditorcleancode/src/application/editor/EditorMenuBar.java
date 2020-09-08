@@ -126,7 +126,9 @@ public class EditorMenuBar {
 	 * Initialisiere Menüpunkt Ansicht
 	 *****************************************************/
 	private void initViewMenu() {
+		checkMenuItemToolBar.setSelected(true);
 		checkMenuItemToolBar.setOnAction(e -> eventFunctionsOther.displayToolBar(checkMenuItemToolBar.isSelected()));
+		checkMenuItemStatusbar.setSelected(true);
 		checkMenuItemStatusbar.setOnAction(e -> eventFunctionsOther.displayStatusBar(checkMenuItemStatusbar.isSelected()));
 		viewMenu.getItems().addAll(checkMenuItemToolBar, checkMenuItemStatusbar);
 	}

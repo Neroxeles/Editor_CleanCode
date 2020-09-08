@@ -17,15 +17,15 @@ import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 
 public class EventFunctionsFile {
-
-	public EventFunctionsFile(Values values, EditorTextArea editorTextArea, Stage saveRequestStage,
+	
+	public void setNeeds(Values values, EditorTextArea editorTextArea, Stage saveRequestStage,
 			Stage primaryStage) {
 		this.values = values;
 		this.editorTextArea = editorTextArea;
 		this.saveRequestStage = saveRequestStage;
 		this.primaryStage = primaryStage;
 	}
-
+	
 	Values values;
 	EditorTextArea editorTextArea;
 	Stage saveRequestStage;

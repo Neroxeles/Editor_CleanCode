@@ -9,11 +9,11 @@ import javafx.stage.Stage;
 
 public class EventFunctionsEdit {
 
-	public EventFunctionsEdit(EditorTextArea editorTextArea, Stage searchReplaceStage) {
+	public void setNeeds(EditorTextArea editorTextArea, Stage searchReplaceStage) {
 		this.editorTextArea = editorTextArea;
 		this.searchReplaceStage = searchReplaceStage;
 	}
-
+	
 	private EditorTextArea editorTextArea;
 	Stage searchReplaceStage;
 
