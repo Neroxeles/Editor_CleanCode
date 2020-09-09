@@ -31,7 +31,6 @@ public class EditorTextArea {
 	private void initTextArea() {
 		textArea.setPrefHeight(5000);
 		textArea.setFont(Font.font(values.getFontFamily(), values.getFontSize()));
-		textArea.requestFocus();
 		
 		// Listener hinzufügen
 		listenerFunctions.addListenerToTextArea(textArea);
