@@ -2,7 +2,6 @@ package application;
 
 import application.controller.Controller;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.stage.Stage;
 
 

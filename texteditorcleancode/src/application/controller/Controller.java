@@ -8,6 +8,7 @@ import application.editor.EditorToolBar;
 import application.editor.events.EventFunctionsEdit;
 import application.editor.events.EventFunctionsFile;
 import application.editor.events.EventFunctionsOther;
+import application.editor.events.ListenerFunctions;
 import application.font.Font;
 import application.font.FontElements;
 import application.font.events.EventFunctionsFont;
@@ -45,6 +46,9 @@ public class Controller {
 	private EventFunctionsFile eventFunctionsFile;
 	private EventFunctionsEdit eventFunctionsEdit;
 	private EventFunctionsOther eventFunctionsOther;
+	
+	// Listener
+	private ListenerFunctions listenerFunctions;
 
 	// Elemente der PrimaryScene
 	private EditorMenuBar editorMenuBar;
@@ -62,13 +66,15 @@ public class Controller {
 		eventFunctionsFile = new EventFunctionsFile();
 		eventFunctionsEdit = new EventFunctionsEdit();
 		eventFunctionsOther = new EventFunctionsOther();
+		
+		listenerFunctions = new ListenerFunctions();
 
 		editorMenuBar = new EditorMenuBar(eventFunctionsFile, eventFunctionsEdit, eventFunctionsOther);
 		editorToolBar = new EditorToolBar(eventFunctionsFile, eventFunctionsEdit, eventFunctionsOther);
-		editorTextArea = new EditorTextArea(values, primaryStage, eventFunctionsFile);
+		editorTextArea = new EditorTextArea(values, eventFunctionsFile, listenerFunctions);
 		editorStatusBar = new EditorStatusBar();
 
-		editor = new Editor(editorMenuBar, editorToolBar, editorTextArea, editorStatusBar, primaryStage);
+		editor = new Editor(eventFunctionsFile, editorMenuBar, editorToolBar, editorTextArea, editorStatusBar, primaryStage);
 	}
 
 	/********************************************************************************
@@ -100,7 +106,7 @@ public class Controller {
 
 		saveRequestElements = new SaveRequestElements(eventFunctionsSaveRequest);
 
-		saveRequest = new SaveRequest(saveRequestElements, saveRequestStage);
+		saveRequest = new SaveRequest(eventFunctionsSaveRequest, saveRequestElements, saveRequestStage);
 	}
 
 	/********************************************************************************
@@ -158,7 +164,7 @@ public class Controller {
 	public void initFontStage() {
 		fontStage = new Stage();
 
-		eventFunctionsFont = new EventFunctionsFont(editorTextArea);
+		eventFunctionsFont = new EventFunctionsFont(editorTextArea, editorToolBar);
 
 		fontElements = new FontElements(values, eventFunctionsFont);
 
@@ -197,8 +203,9 @@ public class Controller {
 	 * ******************************************************************************
 	 ********************************************************************************/
 	public void initBidirectionality() {
-		eventFunctionsFile.setNeeds(values, editorTextArea, saveRequestStage, primaryStage);
+		eventFunctionsFile.setNeeds(values, editorTextArea, saveRequestStage, primaryStage, fontStage, infoStage, searchReplaceStage);
 		eventFunctionsEdit.setNeeds(editorTextArea, searchReplaceStage);
-		eventFunctionsOther.setNeeds(values, editor, editorTextArea, fontStage, infoStage);
+		eventFunctionsOther.setNeeds(values, editor, editorTextArea, editorToolBar, fontStage, infoStage);
+		listenerFunctions.setNeeds(values, editorStatusBar, editorMenuBar, editorToolBar, primaryStage);
 	}
 }

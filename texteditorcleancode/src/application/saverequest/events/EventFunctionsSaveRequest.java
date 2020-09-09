@@ -36,6 +36,7 @@ public class EventFunctionsSaveRequest {
 			// Wenn kein Dateipfad derzeit existiert
 			saveFileUnder();
 		}
+		saveRequestStage.close();
 	}
 
 	/*****************************************************
@@ -56,7 +57,7 @@ public class EventFunctionsSaveRequest {
 			fileChooser.setInitialDirectory(file.getParentFile());
 		}
 		fileChooser.setInitialFileName("file");
-		file = fileChooser.showSaveDialog(primaryStage);
+		file = fileChooser.showSaveDialog(saveRequestStage);
 
 		functionSave(file);
 		editorTextArea.requestFocus();

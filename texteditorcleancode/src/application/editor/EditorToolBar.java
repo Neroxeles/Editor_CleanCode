@@ -10,7 +10,8 @@ import javafx.scene.control.Tooltip;
 
 public class EditorToolBar {
 
-	public EditorToolBar(EventFunctionsFile eventFunctionsFile, EventFunctionsEdit eventFunctionsEdit, EventFunctionsOther eventFunctionsOther) {
+	public EditorToolBar(EventFunctionsFile eventFunctionsFile, EventFunctionsEdit eventFunctionsEdit,
+			EventFunctionsOther eventFunctionsOther) {
 		this.eventFunctionsFile = eventFunctionsFile;
 		this.eventFunctionsEdit = eventFunctionsEdit;
 		this.eventFunctionsOther = eventFunctionsOther;
@@ -21,7 +22,7 @@ public class EditorToolBar {
 		initUndoRedoTool();
 		initFontTool();
 	}
-	
+
 	private EventFunctionsFile eventFunctionsFile;
 	private EventFunctionsEdit eventFunctionsEdit;
 	private EventFunctionsOther eventFunctionsOther;
@@ -74,11 +75,11 @@ public class EditorToolBar {
 		buttonItemNewFile.setOnAction(e -> eventFunctionsFile.newFile());
 		buttonItemNewFile.setTooltip(new Tooltip("Neu"));
 		buttonItemNewFile.setId("buttonNewFile"); // CSS-ID
-		
+
 		buttonItemOpenFile.setOnAction(e -> eventFunctionsFile.openFile());
 		buttonItemOpenFile.setTooltip(new Tooltip("Öffnen"));
 		buttonItemOpenFile.setId("buttonOpenFile"); // CSS-ID
-		
+
 		buttonItemSaveFile.setOnAction(e -> eventFunctionsFile.saveFile());
 		buttonItemSaveFile.setTooltip(new Tooltip("Speichern"));
 		buttonItemSaveFile.setId("buttonSaveFile"); // CSS-ID
@@ -92,12 +93,12 @@ public class EditorToolBar {
 		buttonItemCut.setTooltip(new Tooltip("Ausschneiden"));
 		buttonItemCut.setDisable(true);
 		buttonItemCut.setId("buttonCut"); // CSS-ID
-		
+
 		buttonItemCopy.setOnAction(e -> eventFunctionsEdit.copySelectedText());
 		buttonItemCopy.setTooltip(new Tooltip("Kopieren"));
 		buttonItemCopy.setDisable(true);
 		buttonItemCopy.setId("buttonCopy"); // CSS-ID
-		
+
 		buttonItemPaste.setOnAction(e -> eventFunctionsEdit.paste());
 		buttonItemPaste.setTooltip(new Tooltip("Einfügen"));
 		buttonItemPaste.setId("buttonPaste"); // CSS-ID
@@ -132,11 +133,11 @@ public class EditorToolBar {
 		buttonItemSmallerFont.setTooltip(new Tooltip("Verkleinern"));
 		buttonItemSmallerFont.setDisable(true);
 		buttonItemSmallerFont.setId("buttonSmallerFont"); // CSS-ID
-		
+
 		buttonItemLargerFont.setOnAction(e -> eventFunctionsOther.fontSizeGrow());
 		buttonItemLargerFont.setTooltip(new Tooltip("Vergrößern"));
 		buttonItemLargerFont.setId("buttonLargerFont"); // CSS-ID
-		
+
 	}
 
 	/********************************************************************************
@@ -147,5 +148,21 @@ public class EditorToolBar {
 
 	public ToolBar getToolBar() {
 		return toolBar;
+	}
+
+	public void buttonItemSmallerFontSetDisabled(boolean value) {
+		this.buttonItemSmallerFont.setDisable(value);
+	}
+
+	public void buttonItemLargerFontSetDisabled(boolean value) {
+		this.buttonItemLargerFont.setDisable(value);
+	}
+
+	public void buttonItemCopySetDisabled(boolean value) {
+		this.buttonItemCopy.setDisable(value);
+	}
+
+	public void buttonItemCutSetDisabled(boolean value) {
+		this.buttonItemCut.setDisable(value);
 	}
 }

@@ -97,16 +97,16 @@ public class EditorMenuBar {
 
 		menuItemOpen.setOnAction(e -> eventFunctionsFile.openFile());
 		menuItemOpen.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN));
-		
+
 		menuItemSave.setOnAction(e -> eventFunctionsFile.saveFile());
 		menuItemSave.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
-		
+
 		menuItemSaveUnder.setOnAction(e -> eventFunctionsFile.saveFileUnder());
 		menuItemSaveUnder.setAccelerator(
 				new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN, KeyCombination.SHIFT_DOWN));
-		
-		menuItemClose.setOnAction(e -> eventFunctionsFile.close());
-		
+
+		menuItemClose.setOnAction(e -> eventFunctionsFile.closeProperly());
+
 		fileMenu.getItems().addAll(menuItemNew, menuItemNewWindow, menuItemOpen, menuItemSave, menuItemSaveUnder,
 				new SeparatorMenuItem(), menuItemClose);
 	}
@@ -119,31 +119,31 @@ public class EditorMenuBar {
 		menuItemUndo.setAccelerator(new KeyCodeCombination(KeyCode.Z, KeyCombination.CONTROL_DOWN));
 		menuItemRedo.setDisable(true); // WIP
 		menuItemRedo.setAccelerator(new KeyCodeCombination(KeyCode.Y, KeyCombination.CONTROL_DOWN));
-		
+
 		menuItemCut.setOnAction(e -> eventFunctionsEdit.cutOutSelectedText());
 		menuItemCut.setAccelerator(new KeyCodeCombination(KeyCode.X, KeyCombination.CONTROL_DOWN));
 		menuItemCut.setDisable(true);
-		
+
 		menuItemCopy.setOnAction(e -> eventFunctionsEdit.copySelectedText());
 		menuItemCopy.setAccelerator(new KeyCodeCombination(KeyCode.C, KeyCombination.CONTROL_DOWN));
 		menuItemCopy.setDisable(true);
-		
+
 		menuItemPaste.setOnAction(e -> eventFunctionsEdit.paste());
 		menuItemPaste.setAccelerator(new KeyCodeCombination(KeyCode.V, KeyCombination.CONTROL_DOWN));
 		menuItemDelete.setDisable(true);
-		
+
 		menuItemDelete.setOnAction(e -> eventFunctionsEdit.deleteSelectedText());
 		menuItemDelete.setAccelerator(new KeyCodeCombination(KeyCode.DELETE));
-		
+
 		menuItemSearch.setOnAction(e -> eventFunctionsEdit.searchReplace());
 		menuItemSearch.setAccelerator(new KeyCodeCombination(KeyCode.F, KeyCombination.CONTROL_DOWN));
-		
+
 		menuItemSelectAll.setOnAction(e -> eventFunctionsEdit.selectAll());
 		menuItemSelectAll.setAccelerator(new KeyCodeCombination(KeyCode.A, KeyCombination.CONTROL_DOWN));
-		
+
 		menuItemDate.setOnAction(e -> eventFunctionsEdit.timestamp());
 		menuItemDate.setAccelerator(new KeyCodeCombination(KeyCode.F5));
-		
+
 		editMenu.getItems().addAll(menuItemUndo, menuItemRedo, new SeparatorMenuItem(), menuItemCut, menuItemCopy,
 				menuItemPaste, menuItemDelete, new SeparatorMenuItem(), menuItemSearch, new SeparatorMenuItem(),
 				menuItemSelectAll, menuItemDate);
@@ -185,7 +185,18 @@ public class EditorMenuBar {
 	 ********************************************************************************/
 
 	public MenuBar getMenuBar() {
-
 		return menuBar;
+	}
+
+	public void menuItemCopySetDisabled(boolean value) {
+		menuItemCopy.setDisable(value);
+	}
+
+	public void menuItemCutSetDisabled(boolean value) {
+		menuItemCut.setDisable(value);
+	}
+
+	public void menuItemDeleteSetDisabled(boolean value) {
+		menuItemDelete.setDisable(value);
 	}
 }

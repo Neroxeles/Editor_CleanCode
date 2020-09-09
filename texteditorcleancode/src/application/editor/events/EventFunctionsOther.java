@@ -3,16 +3,18 @@ package application.editor.events;
 import application.controller.Values;
 import application.editor.Editor;
 import application.editor.EditorTextArea;
+import application.editor.EditorToolBar;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class EventFunctionsOther {
 
-	public void setNeeds(Values values, Editor editor, EditorTextArea editorTextArea, Stage fontStage,
-			Stage infoStage) {
+	public void setNeeds(Values values, Editor editor, EditorTextArea editorTextArea, EditorToolBar editorToolBar,
+			Stage fontStage, Stage infoStage) {
 		this.values = values;
 		this.editor = editor;
 		this.editorTextArea = editorTextArea;
+		this.editorToolBar = editorToolBar;
 		this.fontStage = fontStage;
 		this.infoStage = infoStage;
 	}
@@ -20,6 +22,7 @@ public class EventFunctionsOther {
 	Values values;
 	Editor editor;
 	EditorTextArea editorTextArea;
+	EditorToolBar editorToolBar;
 	Stage fontStage;
 	Stage infoStage;
 
@@ -76,9 +79,12 @@ public class EventFunctionsOther {
 
 		if (values.getFontSize() > 10) {
 			values.setFontSize(values.getFontSize() - 10);
+			editorTextArea.setFont(Font.font(values.getFontFamily(), values.getFontSize()));
+			editorToolBar.buttonItemLargerFontSetDisabled(false);
 		}
-
-		editorTextArea.setFont(Font.font(values.getFontFamily(), values.getFontSize()));
+		if (values.getFontSize() == 10) {
+			editorToolBar.buttonItemSmallerFontSetDisabled(true);
+		}
 
 		editorTextArea.requestFocus();
 	}
@@ -90,9 +96,12 @@ public class EventFunctionsOther {
 
 		if (values.getFontSize() < 70) {
 			values.setFontSize(values.getFontSize() + 10);
+			editorTextArea.setFont(Font.font(values.getFontFamily(), values.getFontSize()));
+			editorToolBar.buttonItemSmallerFontSetDisabled(false);
 		}
-
-		editorTextArea.setFont(Font.font(values.getFontFamily(), values.getFontSize()));
+		if (values.getFontSize() == 70) {
+			editorToolBar.buttonItemLargerFontSetDisabled(true);
+		}
 
 		editorTextArea.requestFocus();
 	}

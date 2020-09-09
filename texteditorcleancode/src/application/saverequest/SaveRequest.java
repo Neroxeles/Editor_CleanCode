@@ -1,5 +1,6 @@
 package application.saverequest;
 
+import application.saverequest.events.EventFunctionsSaveRequest;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -15,13 +16,17 @@ import javafx.stage.Stage;
 
 public class SaveRequest {
 
-	public SaveRequest(SaveRequestElements saveRequestElements, Stage saveRequestStage) {
+	public SaveRequest(EventFunctionsSaveRequest functionsSaveRequest, SaveRequestElements saveRequestElements, Stage saveRequestStage) {
+		this.functionsSaveRequest = functionsSaveRequest;
 		this.saveRequestElements = saveRequestElements;
 		this.saveRequestStage = saveRequestStage;
 		initScene();
 		initStage();
 	}
 
+	// Events
+	private EventFunctionsSaveRequest functionsSaveRequest;
+	
 	// Elemente der Scene
 	private SaveRequestElements saveRequestElements;
 
@@ -56,5 +61,9 @@ public class SaveRequest {
 		saveRequestStage.setResizable(false);
 		saveRequestStage.setAlwaysOnTop(true);
 		saveRequestStage.initModality(Modality.APPLICATION_MODAL);
+		saveRequestStage.setOnCloseRequest(e -> {
+			e.consume();
+			functionsSaveRequest.cancel();
+		});
 	}
 }

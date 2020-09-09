@@ -12,24 +12,33 @@ import application.Program;
 import application.controller.Values;
 import application.editor.EditorTextArea;
 import javafx.application.Platform;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 
 public class EventFunctionsFile {
-	
-	public void setNeeds(Values values, EditorTextArea editorTextArea, Stage saveRequestStage,
-			Stage primaryStage) {
+
+	public void setNeeds(Values values, EditorTextArea editorTextArea, Stage saveRequestStage, Stage primaryStage,
+			Stage fontStage, Stage infoStage, Stage searchReplaceStage) {
 		this.values = values;
 		this.editorTextArea = editorTextArea;
 		this.saveRequestStage = saveRequestStage;
 		this.primaryStage = primaryStage;
+		this.fontStage = fontStage;
+		this.infoStage = infoStage;
+		this.searchReplaceStage = searchReplaceStage;
 	}
-	
-	Values values;
-	EditorTextArea editorTextArea;
-	Stage saveRequestStage;
-	Stage primaryStage;
+
+	private Values values;
+	private EditorTextArea editorTextArea;
+	private Stage saveRequestStage;
+	private Stage primaryStage;
+	private Stage fontStage;
+	private Stage infoStage;
+	private Stage searchReplaceStage;
 
 	/*****************************************************
 	 * Methode - newFile
@@ -86,16 +95,49 @@ public class EventFunctionsFile {
 	}
 
 	/*****************************************************
+	 * Methode - DragOver
+	 *****************************************************/
+	public void dragOver(DragEvent e) {
+		if (e.getGestureSource() != editorTextArea.getTextArea() && e.getDragboard().hasFiles()) {
+			// allow for both copying and moving, whatever user chooses
+			e.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+		}
+		e.consume();
+	}
+
+	/*****************************************************
+	 * Methode - DragDropped
+	 *****************************************************/
+	public void dragDropped(DragEvent e) {
+		Dragboard db = e.getDragboard();
+		boolean success = false;
+
+		if (db.getFiles().get(0).toString().endsWith(".txt")) {
+			try {
+				openFileViaDragnDrop(db.getFiles().get(0).toString(), primaryStage);
+			} catch (IOException e1) {
+			}
+			success = true;
+		}
+
+		// let the source know whether the string was successfully transferred and used
+		e.setDropCompleted(success);
+		e.consume();
+	}
+
+	/*****************************************************
 	 * Methode - openFileViaDragnDrop
 	 *****************************************************/
 	public void openFileViaDragnDrop(String filePath, Stage primaryStage) throws IOException {
-		
+
 		// File
 		File file = new File(filePath);
 
 		if (values.isUpdated()) {
 			saveRequestStage.showAndWait();
-		} else {
+		}
+
+		if (!values.isCanceled()) {
 			// Auslesen der Datei und ins Textfeld schreiben
 			if (file != null) {
 				InputStream in = new FileInputStream(file);
@@ -112,8 +154,11 @@ public class EventFunctionsFile {
 				primaryStage.setTitle(values.getFilePath());
 			}
 		}
+		values.setCanceled(false);
+
+		editorTextArea.requestFocus();
 	}
-	
+
 	/*****************************************************
 	 * Funktion für openFile
 	 *****************************************************/
@@ -215,12 +260,15 @@ public class EventFunctionsFile {
 	/*****************************************************
 	 * Methode - close
 	 *****************************************************/
-	public void close() {
+	public void closeProperly() {
 		if (values.isUpdated()) {
 			saveRequestStage.showAndWait();
 		}
 		if (!values.isCanceled()) {
 			primaryStage.close();
+			fontStage.close();
+			infoStage.close();
+			searchReplaceStage.close();
 		} else {
 			values.setCanceled(false);
 		}
