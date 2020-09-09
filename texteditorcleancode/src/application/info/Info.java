@@ -69,7 +69,5 @@ public class Info {
 		// Mindestgröße
 		infoStage.setMinHeight(300);
 		infoStage.setMinWidth(430);
-		// Sichtbarkeit der Stage TODO remove later
-		infoStage.show();
 	}
 }

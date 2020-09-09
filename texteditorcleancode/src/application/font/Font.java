@@ -41,7 +41,5 @@ public class Font {
 		fontStage.setScene(scene);
 		fontStage.setMinHeight(100);
 		fontStage.setMinWidth(300);
-		// Sichtbarkeit der Stage TODO remove later
-		fontStage.show();
 	}
 }

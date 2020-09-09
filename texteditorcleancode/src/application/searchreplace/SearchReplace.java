@@ -55,7 +55,5 @@ public class SearchReplace {
 		// Scene der Stage
 		searchReplaceStage.setScene(scene);
 		searchReplaceStage.setResizable(false);
-		// Sichtbarkeit der Stage TODO remove later
-		searchReplaceStage.show();
 	}
 }

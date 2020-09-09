@@ -25,6 +25,5 @@ public class Program extends Application {
 		controller.initInfoStage();
 		controller.initSearchReplaceStage();
 		controller.initBidirectionality();
-		primaryStage.setOnCloseRequest(e -> Platform.exit());
 	}
 }

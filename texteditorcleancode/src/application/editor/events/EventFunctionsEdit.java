@@ -69,6 +69,7 @@ public class EventFunctionsEdit {
 		if (searchReplaceStage.isShowing() == false) {
 			searchReplaceStage.show();
 		}
+		searchReplaceStage.toFront();
 		// Falls das Fenster Minimiert ist, zeige das Fenster
 		searchReplaceStage.setIconified(false);
 		editorTextArea.requestFocus();

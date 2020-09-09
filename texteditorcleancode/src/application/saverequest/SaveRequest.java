@@ -54,8 +54,7 @@ public class SaveRequest {
 		// Scene der Stage
 		saveRequestStage.setScene(scene);
 		saveRequestStage.setResizable(false);
+		saveRequestStage.setAlwaysOnTop(true);
 		saveRequestStage.initModality(Modality.APPLICATION_MODAL);
-		// Sichtbarkeit der Stage TODO remove later
-		saveRequestStage.show();
 	}
 }

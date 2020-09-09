@@ -8,6 +8,9 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 
 public class EditorMenuBar {
 
@@ -23,11 +26,11 @@ public class EditorMenuBar {
 		initViewMenu();
 		initHelpMenu();
 	}
-	
+
 	EventFunctionsFile eventFunctionsFile;
 	EventFunctionsEdit eventFunctionsEdit;
 	EventFunctionsOther eventFunctionsOther;
-	
+
 	/********************************************************************************
 	 * ******************************************************************************
 	 * Elemente der MenuBar
@@ -86,11 +89,24 @@ public class EditorMenuBar {
 	 *****************************************************/
 	private void initFileMenu() {
 		menuItemNew.setOnAction(e -> eventFunctionsFile.newFile());
+		menuItemNew.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN));
+
 		menuItemNewWindow.setOnAction(e -> eventFunctionsFile.launchAnotherApplication());
+		menuItemNewWindow.setAccelerator(
+				new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN, KeyCombination.SHIFT_DOWN));
+
 		menuItemOpen.setOnAction(e -> eventFunctionsFile.openFile());
+		menuItemOpen.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN));
+		
 		menuItemSave.setOnAction(e -> eventFunctionsFile.saveFile());
+		menuItemSave.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
+		
 		menuItemSaveUnder.setOnAction(e -> eventFunctionsFile.saveFileUnder());
+		menuItemSaveUnder.setAccelerator(
+				new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN, KeyCombination.SHIFT_DOWN));
+		
 		menuItemClose.setOnAction(e -> eventFunctionsFile.close());
+		
 		fileMenu.getItems().addAll(menuItemNew, menuItemNewWindow, menuItemOpen, menuItemSave, menuItemSaveUnder,
 				new SeparatorMenuItem(), menuItemClose);
 	}
@@ -99,15 +115,35 @@ public class EditorMenuBar {
 	 * Initialisiere Menüpunkt Bearbeiten
 	 *****************************************************/
 	private void initEditMenu() {
-//		menuItemUndo.setOnAction(e -> eventFunctionsEdit); WIP
-//		menuItemRedo.setOnAction(e -> eventFunctionsEdit); WIP
+		menuItemUndo.setDisable(true); // WIP
+		menuItemUndo.setAccelerator(new KeyCodeCombination(KeyCode.Z, KeyCombination.CONTROL_DOWN));
+		menuItemRedo.setDisable(true); // WIP
+		menuItemRedo.setAccelerator(new KeyCodeCombination(KeyCode.Y, KeyCombination.CONTROL_DOWN));
+		
 		menuItemCut.setOnAction(e -> eventFunctionsEdit.cutOutSelectedText());
+		menuItemCut.setAccelerator(new KeyCodeCombination(KeyCode.X, KeyCombination.CONTROL_DOWN));
+		menuItemCut.setDisable(true);
+		
 		menuItemCopy.setOnAction(e -> eventFunctionsEdit.copySelectedText());
+		menuItemCopy.setAccelerator(new KeyCodeCombination(KeyCode.C, KeyCombination.CONTROL_DOWN));
+		menuItemCopy.setDisable(true);
+		
 		menuItemPaste.setOnAction(e -> eventFunctionsEdit.paste());
+		menuItemPaste.setAccelerator(new KeyCodeCombination(KeyCode.V, KeyCombination.CONTROL_DOWN));
+		menuItemDelete.setDisable(true);
+		
 		menuItemDelete.setOnAction(e -> eventFunctionsEdit.deleteSelectedText());
+		menuItemDelete.setAccelerator(new KeyCodeCombination(KeyCode.DELETE));
+		
 		menuItemSearch.setOnAction(e -> eventFunctionsEdit.searchReplace());
+		menuItemSearch.setAccelerator(new KeyCodeCombination(KeyCode.F, KeyCombination.CONTROL_DOWN));
+		
 		menuItemSelectAll.setOnAction(e -> eventFunctionsEdit.selectAll());
+		menuItemSelectAll.setAccelerator(new KeyCodeCombination(KeyCode.A, KeyCombination.CONTROL_DOWN));
+		
 		menuItemDate.setOnAction(e -> eventFunctionsEdit.timestamp());
+		menuItemDate.setAccelerator(new KeyCodeCombination(KeyCode.F5));
+		
 		editMenu.getItems().addAll(menuItemUndo, menuItemRedo, new SeparatorMenuItem(), menuItemCut, menuItemCopy,
 				menuItemPaste, menuItemDelete, new SeparatorMenuItem(), menuItemSearch, new SeparatorMenuItem(),
 				menuItemSelectAll, menuItemDate);
@@ -129,7 +165,8 @@ public class EditorMenuBar {
 		checkMenuItemToolBar.setSelected(true);
 		checkMenuItemToolBar.setOnAction(e -> eventFunctionsOther.displayToolBar(checkMenuItemToolBar.isSelected()));
 		checkMenuItemStatusbar.setSelected(true);
-		checkMenuItemStatusbar.setOnAction(e -> eventFunctionsOther.displayStatusBar(checkMenuItemStatusbar.isSelected()));
+		checkMenuItemStatusbar
+				.setOnAction(e -> eventFunctionsOther.displayStatusBar(checkMenuItemStatusbar.isSelected()));
 		viewMenu.getItems().addAll(checkMenuItemToolBar, checkMenuItemStatusbar);
 	}
 

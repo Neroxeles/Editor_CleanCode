@@ -86,6 +86,35 @@ public class EventFunctionsFile {
 	}
 
 	/*****************************************************
+	 * Methode - openFileViaDragnDrop
+	 *****************************************************/
+	public void openFileViaDragnDrop(String filePath, Stage primaryStage) throws IOException {
+		
+		// File
+		File file = new File(filePath);
+
+		if (values.isUpdated()) {
+			saveRequestStage.showAndWait();
+		} else {
+			// Auslesen der Datei und ins Textfeld schreiben
+			if (file != null) {
+				InputStream in = new FileInputStream(file);
+				BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+				StringBuilder out = new StringBuilder();
+				String line;
+				while ((line = reader.readLine()) != null) {
+					out.append(line + "\n");
+				}
+				editorTextArea.setText(out.toString());
+				reader.close();
+				values.setFilePath(file.getPath());
+				values.setUpdated(false);
+				primaryStage.setTitle(values.getFilePath());
+			}
+		}
+	}
+	
+	/*****************************************************
 	 * Funktion für openFile
 	 *****************************************************/
 	private void functionOpen() throws IOException {

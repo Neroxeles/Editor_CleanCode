@@ -38,6 +38,7 @@ public class EventFunctionsOther {
 		if (fontStage.isShowing() == false) {
 			fontStage.show();
 		}
+		fontStage.toFront();
 		editorTextArea.requestFocus();
 	}
 
@@ -64,6 +65,7 @@ public class EventFunctionsOther {
 		if (infoStage.isShowing() == false) {
 			infoStage.show();
 		}
+		infoStage.toFront();
 		editorTextArea.requestFocus();
 	}
 

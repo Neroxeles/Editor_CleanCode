@@ -42,15 +42,15 @@ public class Controller {
 	private Stage primaryStage;
 
 	// Events --> siehe unten "Notwendige Bidirektionalität"
-	private EventFunctionsFile eventFunctionsFile = new EventFunctionsFile();
-	private EventFunctionsEdit eventFunctionsEdit = new EventFunctionsEdit();
-	private EventFunctionsOther eventFunctionsOther = new EventFunctionsOther();
+	private EventFunctionsFile eventFunctionsFile;
+	private EventFunctionsEdit eventFunctionsEdit;
+	private EventFunctionsOther eventFunctionsOther;
 
 	// Elemente der PrimaryScene
-	private EditorMenuBar editorMenuBar = new EditorMenuBar(eventFunctionsFile, eventFunctionsEdit, eventFunctionsOther);
-	private EditorToolBar editorToolBar = new EditorToolBar();
-	private EditorTextArea editorTextArea = new EditorTextArea();
-	private EditorStatusBar editorStatusBar = new EditorStatusBar();
+	private EditorMenuBar editorMenuBar;
+	private EditorToolBar editorToolBar;
+	private EditorTextArea editorTextArea;
+	private EditorStatusBar editorStatusBar;
 
 	// Scene für die primaryStage
 	private Editor editor;
@@ -59,6 +59,14 @@ public class Controller {
 	 * Innitialisieren der PrimaryStage
 	 *****************************************************/
 	public void initEditor() {
+		eventFunctionsFile = new EventFunctionsFile();
+		eventFunctionsEdit = new EventFunctionsEdit();
+		eventFunctionsOther = new EventFunctionsOther();
+
+		editorMenuBar = new EditorMenuBar(eventFunctionsFile, eventFunctionsEdit, eventFunctionsOther);
+		editorToolBar = new EditorToolBar(eventFunctionsFile, eventFunctionsEdit, eventFunctionsOther);
+		editorTextArea = new EditorTextArea(values, primaryStage, eventFunctionsFile);
+		editorStatusBar = new EditorStatusBar();
 
 		editor = new Editor(editorMenuBar, editorToolBar, editorTextArea, editorStatusBar, primaryStage);
 	}
@@ -70,14 +78,13 @@ public class Controller {
 	 ********************************************************************************/
 
 	// Stage
-	private Stage saveRequestStage = new Stage();
+	private Stage saveRequestStage;
 
 	// Events
-	private EventFunctionsSaveRequest eventFunctionsSaveRequest = new EventFunctionsSaveRequest(values, editorTextArea, primaryStage,
-			saveRequestStage);
+	private EventFunctionsSaveRequest eventFunctionsSaveRequest;
 
 	// Elemente der saveRequestStage
-	private SaveRequestElements saveRequestElements = new SaveRequestElements(eventFunctionsSaveRequest);
+	private SaveRequestElements saveRequestElements;
 
 	// Scene für die saveRequestStage
 	private SaveRequest saveRequest;
@@ -86,6 +93,12 @@ public class Controller {
 	 * Innitialisieren der SaveRequestStage
 	 *****************************************************/
 	public void initSaveRequestStage() {
+		saveRequestStage = new Stage();
+
+		eventFunctionsSaveRequest = new EventFunctionsSaveRequest(values, editorTextArea, primaryStage,
+				saveRequestStage);
+
+		saveRequestElements = new SaveRequestElements(eventFunctionsSaveRequest);
 
 		saveRequest = new SaveRequest(saveRequestElements, saveRequestStage);
 	}
@@ -97,13 +110,13 @@ public class Controller {
 	 ********************************************************************************/
 
 	// Stage
-	private Stage searchReplaceStage = new Stage();
+	private Stage searchReplaceStage;
 
 	// Events
-	private EventFunctionsSearchReplace eventFunctionsSearchReplace = new EventFunctionsSearchReplace(editorTextArea);
+	private EventFunctionsSearchReplace eventFunctionsSearchReplace;
 
 	// Elemente der SearchReplaceStage
-	private SearchReplaceElements searchReplaceElements = new SearchReplaceElements(eventFunctionsSearchReplace);
+	private SearchReplaceElements searchReplaceElements;
 
 	// Scene für die SearchReplaceStage
 	private SearchReplace searchReplace;
@@ -112,6 +125,11 @@ public class Controller {
 	 * Innitialisieren der SearchReplaceStage
 	 *****************************************************/
 	public void initSearchReplaceStage() {
+		searchReplaceStage = new Stage();
+
+		eventFunctionsSearchReplace = new EventFunctionsSearchReplace(editorTextArea);
+
+		searchReplaceElements = new SearchReplaceElements(eventFunctionsSearchReplace);
 
 		searchReplace = new SearchReplace(searchReplaceElements, searchReplaceStage);
 	}
@@ -123,13 +141,13 @@ public class Controller {
 	 ********************************************************************************/
 
 	// Stage
-	private Stage fontStage = new Stage();
+	private Stage fontStage;
 
 	// Events
-	EventFunctionsFont eventFunctionsFont = new EventFunctionsFont(editorTextArea);
+	EventFunctionsFont eventFunctionsFont;
 
 	// Elemente der SearchReplaceStage
-	private FontElements fontElements = new FontElements(values, eventFunctionsFont);
+	private FontElements fontElements;
 
 	// Scene für die FontStage
 	private Font font;
@@ -138,6 +156,11 @@ public class Controller {
 	 * Innitialisieren der FontStage
 	 *****************************************************/
 	public void initFontStage() {
+		fontStage = new Stage();
+
+		eventFunctionsFont = new EventFunctionsFont(editorTextArea);
+
+		fontElements = new FontElements(values, eventFunctionsFont);
 
 		font = new Font(fontElements, fontStage);
 	}
@@ -161,10 +184,13 @@ public class Controller {
 	 * Innitialisieren der InfoStage
 	 *****************************************************/
 	public void initInfoStage() {
+		infoStage = new Stage();
+
+		infoElements = new InfoElements();
 
 		info = new Info(infoElements, infoStage);
 	}
-	
+
 	/********************************************************************************
 	 * ******************************************************************************
 	 * Notwendige Bidirektionalität

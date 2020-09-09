@@ -1,12 +1,19 @@
 package application.editor;
 
+import application.editor.events.EventFunctionsEdit;
+import application.editor.events.EventFunctionsFile;
+import application.editor.events.EventFunctionsOther;
 import javafx.scene.control.Button;
 import javafx.scene.control.Separator;
 import javafx.scene.control.ToolBar;
+import javafx.scene.control.Tooltip;
 
 public class EditorToolBar {
 
-	public EditorToolBar() {
+	public EditorToolBar(EventFunctionsFile eventFunctionsFile, EventFunctionsEdit eventFunctionsEdit, EventFunctionsOther eventFunctionsOther) {
+		this.eventFunctionsFile = eventFunctionsFile;
+		this.eventFunctionsEdit = eventFunctionsEdit;
+		this.eventFunctionsOther = eventFunctionsOther;
 		initToolBar();
 		initFileTool();
 		initEditTool();
@@ -14,6 +21,10 @@ public class EditorToolBar {
 		initUndoRedoTool();
 		initFontTool();
 	}
+	
+	private EventFunctionsFile eventFunctionsFile;
+	private EventFunctionsEdit eventFunctionsEdit;
+	private EventFunctionsOther eventFunctionsOther;
 
 	/********************************************************************************
 	 * ******************************************************************************
@@ -60,8 +71,16 @@ public class EditorToolBar {
 	 * Initialisiere Datei-Gruppe
 	 *****************************************************/
 	private void initFileTool() {
+		buttonItemNewFile.setOnAction(e -> eventFunctionsFile.newFile());
+		buttonItemNewFile.setTooltip(new Tooltip("Neu"));
 		buttonItemNewFile.setId("buttonNewFile"); // CSS-ID
+		
+		buttonItemOpenFile.setOnAction(e -> eventFunctionsFile.openFile());
+		buttonItemOpenFile.setTooltip(new Tooltip("Öffnen"));
 		buttonItemOpenFile.setId("buttonOpenFile"); // CSS-ID
+		
+		buttonItemSaveFile.setOnAction(e -> eventFunctionsFile.saveFile());
+		buttonItemSaveFile.setTooltip(new Tooltip("Speichern"));
 		buttonItemSaveFile.setId("buttonSaveFile"); // CSS-ID
 	}
 
@@ -69,8 +88,18 @@ public class EditorToolBar {
 	 * Initialisiere Bearbeitungs-Gruppe
 	 *****************************************************/
 	private void initEditTool() {
+		buttonItemCut.setOnAction(e -> eventFunctionsEdit.cutOutSelectedText());
+		buttonItemCut.setTooltip(new Tooltip("Ausschneiden"));
+		buttonItemCut.setDisable(true);
 		buttonItemCut.setId("buttonCut"); // CSS-ID
+		
+		buttonItemCopy.setOnAction(e -> eventFunctionsEdit.copySelectedText());
+		buttonItemCopy.setTooltip(new Tooltip("Kopieren"));
+		buttonItemCopy.setDisable(true);
 		buttonItemCopy.setId("buttonCopy"); // CSS-ID
+		
+		buttonItemPaste.setOnAction(e -> eventFunctionsEdit.paste());
+		buttonItemPaste.setTooltip(new Tooltip("Einfügen"));
 		buttonItemPaste.setId("buttonPaste"); // CSS-ID
 	}
 
@@ -78,6 +107,8 @@ public class EditorToolBar {
 	 * Initialisiere Suchen&Ersetzen-Gruppe
 	 *****************************************************/
 	private void initSearchRequestTool() {
+		buttonItemSearch.setOnAction(e -> eventFunctionsEdit.searchReplace());
+		buttonItemSearch.setTooltip(new Tooltip("Suchen / Ersetzen"));
 		buttonItemSearch.setId("buttonSearch"); // CSS-ID
 	}
 
@@ -85,7 +116,11 @@ public class EditorToolBar {
 	 * Initialisiere Undo-Redo-Gruppe
 	 *****************************************************/
 	private void initUndoRedoTool() {
+		buttonItemUndo.setDisable(true); // WIP
+		buttonItemUndo.setTooltip(new Tooltip("Rückgängig"));
 		buttonItemUndo.setId("buttonUndo"); // CSS-ID
+		buttonItemRedo.setDisable(true); // WIP
+		buttonItemRedo.setTooltip(new Tooltip("Wiederholen"));
 		buttonItemRedo.setId("buttonRedo"); // CSS-ID
 	}
 
@@ -93,8 +128,15 @@ public class EditorToolBar {
 	 * Initialisiere Font-Gruppe
 	 *****************************************************/
 	private void initFontTool() {
+		buttonItemSmallerFont.setOnAction(e -> eventFunctionsOther.fontSizeShrink());
+		buttonItemSmallerFont.setTooltip(new Tooltip("Verkleinern"));
+		buttonItemSmallerFont.setDisable(true);
 		buttonItemSmallerFont.setId("buttonSmallerFont"); // CSS-ID
+		
+		buttonItemLargerFont.setOnAction(e -> eventFunctionsOther.fontSizeGrow());
+		buttonItemLargerFont.setTooltip(new Tooltip("Vergrößern"));
 		buttonItemLargerFont.setId("buttonLargerFont"); // CSS-ID
+		
 	}
 
 	/********************************************************************************
