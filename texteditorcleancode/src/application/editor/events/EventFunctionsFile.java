@@ -269,6 +269,10 @@ public class EventFunctionsFile {
 			fontStage.close();
 			infoStage.close();
 			searchReplaceStage.close();
+			try {
+				values.saveProperties();
+			} catch (Exception e) {
+			}
 		} else {
 			values.setCanceled(false);
 		}

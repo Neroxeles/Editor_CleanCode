@@ -1,6 +1,23 @@
 package application.controller;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Properties;
+
 public class Values {
+
+	public Values() {
+		try {
+			loadProperties();
+		} catch (Exception e) {
+			try {
+				saveProperties();
+			} catch (Exception e1) {
+			}
+		}
+	}
 
 	// Dateipfad der aktuell geöffneten Datei
 	private String filePath = "Unknown";
@@ -12,6 +29,31 @@ public class Values {
 	private String fontFamily = "Arial";
 	// Schriftgröße
 	private int fontSize = 10;
+
+	private Properties property = new Properties();
+
+	/*
+	 * Save Property
+	 */
+	public void saveProperties() throws Exception {
+		OutputStream out = new FileOutputStream("configuration.properties");
+
+		property.setProperty("FontFamily", fontFamily);
+		property.setProperty("FontSize", Integer.toString(fontSize));
+
+		property.store(out, null);
+	}
+
+	/*
+	 * Load Properties
+	 */
+	private void loadProperties() throws Exception {
+		InputStream in = new FileInputStream("configuration.properties");
+		property.load(in);
+
+		fontFamily = property.getProperty("FontFamily");
+		fontSize = Integer.parseInt(property.getProperty("FontSize"));
+	}
 
 	public String getFilePath() {
 		return filePath;
