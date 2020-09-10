@@ -45,6 +45,7 @@ public class EventFunctionsEdit {
 	 * Methode - Einfügen
 	 *****************************************************/
 	public void paste() {
+		editorTextArea.replaceSelection("");
 		if (clipboard.hasString()) {
 			editorTextArea.insertText(editorTextArea.getCaretPosition(), clipboard.getString());
 		}
