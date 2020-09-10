@@ -70,7 +70,7 @@ public class Controller {
 		listenerFunctions = new ListenerFunctions();
 
 		editorMenuBar = new EditorMenuBar(eventFunctionsFile, eventFunctionsEdit, eventFunctionsOther);
-		editorToolBar = new EditorToolBar(eventFunctionsFile, eventFunctionsEdit, eventFunctionsOther);
+		editorToolBar = new EditorToolBar(values, eventFunctionsFile, eventFunctionsEdit, eventFunctionsOther);
 		editorTextArea = new EditorTextArea(values, eventFunctionsFile, listenerFunctions);
 		editorStatusBar = new EditorStatusBar();
 

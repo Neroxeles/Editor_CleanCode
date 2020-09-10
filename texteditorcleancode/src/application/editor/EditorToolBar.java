@@ -1,5 +1,6 @@
 package application.editor;
 
+import application.controller.Values;
 import application.editor.events.EventFunctionsEdit;
 import application.editor.events.EventFunctionsFile;
 import application.editor.events.EventFunctionsOther;
@@ -10,8 +11,9 @@ import javafx.scene.control.Tooltip;
 
 public class EditorToolBar {
 
-	public EditorToolBar(EventFunctionsFile eventFunctionsFile, EventFunctionsEdit eventFunctionsEdit,
+	public EditorToolBar(Values values, EventFunctionsFile eventFunctionsFile, EventFunctionsEdit eventFunctionsEdit,
 			EventFunctionsOther eventFunctionsOther) {
+		this.values = values;
 		this.eventFunctionsFile = eventFunctionsFile;
 		this.eventFunctionsEdit = eventFunctionsEdit;
 		this.eventFunctionsOther = eventFunctionsOther;
@@ -23,6 +25,7 @@ public class EditorToolBar {
 		initFontTool();
 	}
 
+	private Values values;
 	private EventFunctionsFile eventFunctionsFile;
 	private EventFunctionsEdit eventFunctionsEdit;
 	private EventFunctionsOther eventFunctionsOther;
@@ -131,11 +134,16 @@ public class EditorToolBar {
 	private void initFontTool() {
 		buttonItemSmallerFont.setOnAction(e -> eventFunctionsOther.fontSizeShrink());
 		buttonItemSmallerFont.setTooltip(new Tooltip("Verkleinern"));
-		buttonItemSmallerFont.setDisable(true);
+		if (values.getFontSize()==10) {
+			buttonItemSmallerFont.setDisable(true);
+		}
 		buttonItemSmallerFont.setId("buttonSmallerFont"); // CSS-ID
 
 		buttonItemLargerFont.setOnAction(e -> eventFunctionsOther.fontSizeGrow());
 		buttonItemLargerFont.setTooltip(new Tooltip("Vergrößern"));
+		if (values.getFontSize()==70) {
+			buttonItemLargerFont.setDisable(true);
+		}
 		buttonItemLargerFont.setId("buttonLargerFont"); // CSS-ID
 
 	}
